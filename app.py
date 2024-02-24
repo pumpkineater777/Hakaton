@@ -6,9 +6,13 @@ app = Flask(__name__)
 cur_id = 0
 data = []
 
+
 def stop_it(id):
     pass
 
+@app.route("/temp", methods=['GET'])
+def temp():
+    return jsonify(data), 201
 
 @app.route('/api/partners', methods=['POST'])
 def create_partner():
@@ -29,7 +33,6 @@ def create_partner():
     temp['spent_budget'] = data[-1]['spent_budget']
     return jsonify(temp), 201
 
-
 @app.route('/api/partners/<int:id>', methods=['GET'])
 def get_info(id):
     temp = dict()
@@ -48,19 +51,9 @@ def update_info(id):
     stop_it(id)
     return jsonify({"ok": "ok"}), 201
 
-@app.route('/')
+@app.route('/home')
 def home():
-    return "<p>Hello, World!</p>"
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        # проверка логина и пароля
-        return 'Вы вошли в систему!'
-    else:
-        return render_template('login.html')
+    return render_template('Main.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
