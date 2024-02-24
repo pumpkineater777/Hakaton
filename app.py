@@ -1,13 +1,15 @@
 #!flask/bin/python
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
 cur_id = 0
 data = []
 
+
 def stop_it(id):
     pass
+
 
 @app.route('/api/partners', methods=['POST'])
 def create_partner():
@@ -47,8 +49,22 @@ def update_info(id):
     stop_it(id)
     return jsonify({"ok": "ok"}), 201
 
+@app.route('/')
+def home():
+    return "<p>Hello, World!</p>"
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # проверка логина и пароля
+        return 'Вы вошли в систему!'
+    else:
+        return render_template('login.html')
+
 if __name__ == '__main__':
-    app.run(debug=True)
-#curl -i -H "Content-Type: application/json" -X POST --data "{"""name""":"""VTB""","""budget""":10002}" http://localhost:5000/api/partners
-#curl -i http://localhost:5000/api/partners/0
-#curl -i -H "Content-Type: application/json" -X PUT --data "{"""date""":"""2023-02-0200:00:00""","""name""":"""VTB""","""cashback""":23232.34}" http://localhost:5000/api/partners/0/cashback
+    app.run(debug=True, port=8080)
+# curl -i -H "Content-Type: application/json" -X POST --data "{"""name""":"""VTB""","""budget""":10002}" http://localhost:8080/api/partners
+# curl -i http://localhost:8080/api/partners/0
+# curl -i -H "Content-Type: application/json" -X PUT --data "{"""date""":"""2023-02-0200:00:00""","""name""":"""VTB""","""cashback""":23232.34}" http://localhost:8080/api/partners/0/cashback
