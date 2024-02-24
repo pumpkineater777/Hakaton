@@ -74,7 +74,7 @@ main {
     align-items: center;
   font-size: 25px;
   color:#e8e8e8;
-  scrollbar-color: #0B1957 #FFDBD1;
+  scrollbar-color: #D0CDC9 gray;
  	scrollbar-width: thin;
 } 
 
@@ -203,6 +203,9 @@ header p {
 #sendOptions {
     width:100%;
     height:100%;
+    background: gray;
+    color: #e8e8e8;
+    font-weight: bold;
     position: absolute;
     display: flex;
     text-align:center;
