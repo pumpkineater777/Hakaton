@@ -75,16 +75,21 @@ document.querySelector("body").addEventListener("click", (e) => {
     document.querySelector("#inputBudget").value = "";
     document.querySelector(".addCompany").classList.add("hidden");
 })
-/*
-  fetch("http://localhost:8080/api/partners", {method: 'POST'})
+
+  fetch("http://localhost:8080/temp", {method: 'GET', mod: "cors"})
   .then((response) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    return response;
+    return response.json();
   })
   .then((response) => {
-    console.log(response.json()["name"]);
-  })
-*/
+    let data = response;
+    let sections = document.querySelector(".sections");
+
+    for (el of data) {
+       addOption(el);
+    }
+  });
+
