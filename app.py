@@ -1,14 +1,11 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request, render_template
+from temp import get
 
 app = Flask(__name__)
 
 cur_id = 0
 data = []
-
-
-def stop_it(id):
-    pass
 
 @app.route("/temp", methods=['GET'])
 def temp():
@@ -48,7 +45,8 @@ def get_info(id):
 def update_info(id):
     data[id]['spent_budget'] += request.json["cashback"]
     data[id]['dates'].append([request.json["date"].split()[0], request.json["cashback"]])
-    stop_it(id)
+    if not data[id]['is_stopped']:
+        data[id]['is_stopped'] = get(data[id]['dates'], data[id]['budget'], data[id]['spent_budget'])
     return jsonify({"ok": "ok"}), 201
 
 @app.route('/home')
