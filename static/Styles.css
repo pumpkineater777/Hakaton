@@ -52,6 +52,7 @@ main {
 	display: grid;
 	background: #808080;
 	margin: 0;
+	box-shadow: 0px 7px 10px 2px rgba(0, 0, 0, 0.39) inset;
 	position: absolute;
 	grid-template-columns: 0.1fr 1fr;
 	width: 100%;
@@ -113,7 +114,7 @@ main {
 	display: grid;
 	grid-template-columns: 1fr 0.1fr;
 	border-top: 1px solid #3A3A3A;
-	background: gray;
+	background: #c0c0c0;
 	position: relative;
 	box-sizing: content-box;
 }
@@ -171,7 +172,8 @@ header p {
     width:200px;
     z-index:10000;
     height:150px;
-    background:white;
+    background:#F1F3F4;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     border-radius: 1px;
     left: 0;
     top: 0;
