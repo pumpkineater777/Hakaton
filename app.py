@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 cur_id = 0
-data = []
+data = dict()
 
 
 @app.route("/temp", methods=['GET'])
@@ -19,20 +19,20 @@ def temp():
 @app.route('/api/partners', methods=['POST'])
 def create_partner():
     global cur_id
-    data.append({
+    data[cur_id] = {
         'id': cur_id,
         'name': request.json["name"],
         'budget': request.json["budget"],
         'spent_budget': 0,
         'is_stopped': False,
         'dates': []
-    })
-    cur_id += 1
+    }
     temp = dict()
-    temp['id'] = data[-1]['id']
-    temp['name'] = data[-1]['name']
-    temp['budget'] = data[-1]['budget']
-    temp['spent_budget'] = data[-1]['spent_budget']
+    temp['id'] = data[cur_id]['id']
+    temp['name'] = data[cur_id]['name']
+    temp['budget'] = data[cur_id]['budget']
+    temp['spent_budget'] = data[cur_id]['spent_budget']
+    cur_id += 1
     return jsonify(temp), 201
 
 
