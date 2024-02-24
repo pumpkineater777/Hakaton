@@ -50,7 +50,7 @@ main {
 
 .icon {
 	display: grid;
-	background: #3A3A3A;
+	background: #808080;
 	margin: 0;
 	position: absolute;
 	grid-template-columns: 0.1fr 1fr;
