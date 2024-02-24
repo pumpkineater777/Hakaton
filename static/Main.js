@@ -18,7 +18,7 @@ function addOption(obj) {
 
     p.innerHTML = obj.name;
 
-    containerTwo.innerHTML = `										<svg width="30" height="30" class = "button">
+    containerTwo.innerHTML = `										<svg width="30" height="30" class = "button ${obj.name}">
 											<circle cx="18" cy="15" r="0.5" stroke="#e8e8e8" stroke-width="2" fill="#e8e8e8" />
 											<circle cx="15" cy="15" r="12" stroke="#e8e8e8" stroke-width="2" fill="none" />
 											<line x1="18" y1="15" x2="13" y2="9" style="stroke:#e8e8e8;stroke-width:3" />
@@ -87,9 +87,9 @@ document.querySelector("body").addEventListener("click", (e) => {
   .then((response) => {
     let data = response;
     let sections = document.querySelector(".sections");
-
-    for (el of data) {
-       addOption(el);
+    console.log(data)
+    for (x of data) {
+       addOption(x);
     }
   });
 
