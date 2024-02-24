@@ -13,8 +13,8 @@ def get(v, X, Y):
     for i in range(len(v)):
         g.append(v[i][1])
     g.sort()
-    l11 = g[int(len(g)*0.3)]
-    r11 = g[int(len(g)*0.8)]
+    l11 = g[int(len(g)*0.35)]
+    r11 = g[int(len(g)*0.85)]
     x11 = r11-l11+0.000001
     for i in range(len(v)):
         if v[i][1] > r11+x11*1.5:
@@ -23,7 +23,7 @@ def get(v, X, Y):
             v[i][0] = 0
         else:
             v[i][0] = 1
-    p = 0.9
+    p = 0.98546987
     t = []
     k = 1
     x=max(0,len(v)-21)-1
@@ -34,10 +34,10 @@ def get(v, X, Y):
         k *= p
         l = min(l, v[i][1])
         r = max(r, v[i][1])
-    if t[0][1] >= (r-l)*0.7+l:
-        r *= 1.05
-    if t[0][1] <= (r-l)*0.3+l:
-        l *= 0.93
+
+    r *= 1.04
+
+    l *= 0.96
     r += 0.0000001
     l -= 0.0000001
     d = 15
