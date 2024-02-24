@@ -6,7 +6,6 @@ app = Flask(__name__)
 cur_id = 0
 data = []
 
-
 def stop_it(id):
     pass
 
