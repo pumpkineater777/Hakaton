@@ -1,6 +1,6 @@
 body {
 	padding: 0;
-	background: #F8F3EA;
+	background: #373737;
 	margin: 0;
 }
 
@@ -20,7 +20,7 @@ body {
 
 header {
 	display: flex;
-	background: #0B1957;
+	background: #373737;
 }
 
 main {
@@ -50,12 +50,13 @@ main {
 
 .icon {
 	display: grid;
-	background: #FFDBD1;
+	background: #3A3A3A;
 	margin: 0;
 	position: absolute;
 	grid-template-columns: 0.1fr 1fr;
 	width: 100%;
 	height: 100%;
+	cursor: pointer;
 }
 
 .name {
@@ -64,16 +65,15 @@ main {
 	position: absolute;
 	overflow-y: none;
 	overflow-x: auto;
-	  font-family: "Ubuntu", sans-serif;
-  font-weight: bold;
+	  font-family: "Tajawal", sans-serif;
+  font-weight: 300;
   display: flex;
   width:100%;
   height:100%;
     text-align: center;
     align-items: center;
   font-size: 25px;
-  color:#0B1957;
-  font-style: normal;
+  color:#e8e8e8;
   scrollbar-color: #0B1957 #FFDBD1;
  	scrollbar-width: thin;
 } 
@@ -97,11 +97,12 @@ main {
     flex-wrap: nowrap;
     position: absolute;
     overflow-y: auto;
-    scrollbar-color: #0B1957 #FFDBD1;
+    scrollbar-color: #D0CDC9 gray;
   	scrollbar-width: thin;
 }
 
 .image {
+    cursor: pointer;
 	display: flex;
 	margin: 0 0 0 0.5em;
 }
@@ -111,8 +112,8 @@ main {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 0.1fr;
-	border-top: 1px solid #F4C2C2;
-	background: #FFDBD1;
+	border-top: 1px solid #3A3A3A;
+	background: gray;
 	position: relative;
 	box-sizing: content-box;
 }
@@ -125,9 +126,20 @@ nav {
 	position: absolute;
 	width: 100%;
 	box-shadow: 0px 7px 10px 2px rgba(34, 60, 80, 0.2) inset;
-	background: #F8F3EA;
+	background: #414141;
 	height: 100%;
+  	transition: box-shadow 1s;
 }
+
+nav.working {
+	box-shadow: none !important;
+
+}
+
+.option:hover {
+	background: #667579;
+}
+
 .h:after {
 	content:"";
 	display: flex;
@@ -138,4 +150,65 @@ nav {
 	height:25px;
 	background: rgb(128,132,128);
 	background: linear-gradient(180deg, rgba(128,132,128,0) 17%, rgba(0,0,0,0.08757006220456931) 58%);
+}
+
+header p {
+	overflow-y: none;
+	overflow-x: auto;
+	  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  display: flex;
+    text-align: center;
+    align-items: center;
+  font-size: 25px;
+  color:#e8e8e8;
+  font-style: normal;
+  scrollbar-color: #0B1957 #FFDBD1;
+}
+
+.addCompany {
+    position:absolute;
+    width:200px;
+    z-index:10000;
+    height:150px;
+    background:white;
+    border-radius: 1px;
+    left: 0;
+    top: 0;
+}
+.hidden {
+    z-index:-1;
+    display: none;
+}
+.addCompany.visible {
+    z-index:1000;
+    display: grid;
+}
+
+.addCompany form input {
+    max-width: 100%;
+}
+
+.addCompany form {
+    position: absolute;
+    width:100%;
+    height:100%;
+      font-family: "Tajawal", sans-serif;
+  font-weight: 300;
+    border-radius: 1px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 0.2fr;
+}
+
+#sendOptions {
+    width:100%;
+    height:100%;
+    position: absolute;
+    display: flex;
+    text-align:center;
+    align-items: center;
+    padding:0;
+    box-sizing : border-box;
+    border-radius: 1px;
+    justify-content: center;
 }
