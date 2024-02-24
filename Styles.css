@@ -1,0 +1,141 @@
+body {
+	padding: 0;
+	background: #F8F3EA;
+	margin: 0;
+}
+
+.menu {
+	position: absolute;
+	top: 50%;
+	background: #e8e8e8;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	margin: 0 auto;
+	width: 90%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 0.1fr 1fr; 
+	box-shadow: 0px 5px 24px 2px rgba(34, 60, 80, 0.2);
+}
+
+header {
+	display: flex;
+	background: #0B1957;
+}
+
+main {
+	display: grid;
+	grid-template-columns: 0.3fr 1fr; 
+	display: absolute;
+}
+
+.container {
+	position: relative;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	padding: 0;
+}
+
+.options {
+	display: grid;
+	grid-template-rows: 0.1fr 1fr; 
+	position: absolute;
+	width: 100%;
+	height:100%;
+	margin: 0;
+}
+
+.icon {
+	display: grid;
+	background: #FFDBD1;
+	margin: 0;
+	position: absolute;
+	grid-template-columns: 0.1fr 1fr;
+	width: 100%;
+	height: 100%;
+}
+
+.name {
+	padding-left: 1em;
+	padding: 0;
+	position: absolute;
+	overflow-y: none;
+	overflow-x: auto;
+	  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  display: flex;
+  width:100%;
+  height:100%;
+    text-align: center;
+    align-items: center;
+  font-size: 25px;
+  color:#0B1957;
+  font-style: normal;
+  scrollbar-color: #0B1957 #FFDBD1;
+ 	scrollbar-width: thin;
+} 
+
+.name p {
+	padding: 0;
+	margin: 0 0 0 10px;
+}
+
+.sections {
+	display: flex;
+	position: absolute;
+	width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    flex-wrap: nowrap;
+    position: absolute;
+    overflow-y: auto;
+    scrollbar-color: #0B1957 #FFDBD1;
+  	scrollbar-width: thin;
+}
+
+.image {
+	display: flex;
+	margin: 0 0 0 0.5em;
+}
+
+.option {
+	min-height: 50px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 0.1fr;
+	border-top: 1px solid #F4C2C2;
+	background: #FFDBD1;
+	position: relative;
+	box-sizing: content-box;
+}
+
+.button {
+	cursor: pointer;
+}
+
+nav {
+	position: absolute;
+	width: 100%;
+	box-shadow: 0px 7px 10px 2px rgba(34, 60, 80, 0.2) inset;
+	background: #F8F3EA;
+	height: 100%;
+}
+.h:after {
+	content:"";
+	display: flex;
+	width:100%;
+	position: absolute;
+	left:0px;
+	bottom:0px;
+	height:25px;
+	background: rgb(128,132,128);
+	background: linear-gradient(180deg, rgba(128,132,128,0) 17%, rgba(0,0,0,0.08757006220456931) 58%);
+}
