@@ -6,15 +6,15 @@ def get(v, X, Y):
         for i in range(len(v)):
             sred += v[i][1]
         sred /= len(v)
-        if sred*5*1.5+Y < X:
+        if sred*5*2+Y < X:
             v.clear()
-            return sred*5*1.5+Y >= X
+            return sred*5*2+Y >= X
     g = []
     for i in range(len(v)):
         g.append(v[i][1])
     g.sort()
-    l11 = g[int(len(g)*0.35)]
-    r11 = g[int(len(g)*0.85)]
+    l11 = g[int(len(g)*0.25)]
+    r11 = g[int(len(g)*0.75)]
     x11 = r11-l11+0.000001
     for i in range(len(v)):
         if v[i][1] > r11+x11*1.5:
@@ -23,7 +23,7 @@ def get(v, X, Y):
             v[i][0] = 0
         else:
             v[i][0] = 1
-    p = 0.98546987
+    p = 0.9
     t = []
     k = 1
     x=max(0,len(v)-21)-1
@@ -35,12 +35,12 @@ def get(v, X, Y):
         l = min(l, v[i][1])
         r = max(r, v[i][1])
 
-    r *= 1.04
+    r *= 1.05
 
     l *= 0.96
     r += 0.0000001
     l -= 0.0000001
-    d = 15
+    d = 18
     shag = (r-l)/d
     blok = []
     for i in range(0, d):

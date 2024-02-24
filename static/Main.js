@@ -63,7 +63,7 @@ forma.addEventListener("submit", (e) => {
     let budget = +document.querySelector("#inputBudget").value;
 
     document.querySelector(".addCompany").classList.add("hidden");
-    fetch("http://localhost:8080/api/partners", {method: 'POST', body: JSON.stringify({"name": name, "budget": budget})}).then((r) => {
+    fetch("http://localhost:8080/api/partners", {method: 'POST',headers: {'Content-Type': 'application/json;charset=utf-8'}, body: JSON.stringify({"name": name, "budget": budget})}).then((r) => {
         addOption({"name": name, "budget": budget})
     })
     document.querySelector("#inputCompany").value = "";

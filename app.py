@@ -1,9 +1,11 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS, cross_origin
 from strategy import get
 from Graph import plot
 
 app = Flask(__name__)
+CORS(app)
 
 cur_id = 0
 data = []
