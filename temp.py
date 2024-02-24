@@ -52,7 +52,6 @@ def get(v, X, Y):
         loc_Y1 = Y
         loc_Y1_zavtra = Y
         for i in range(5):
-
             num_bl = random.randint(0, cnt)
             num_bl /= 100
             cnt1 = 0
