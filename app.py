@@ -17,7 +17,6 @@ def temp():
 @app.route('/api/partners', methods=['POST'])
 def create_partner():
     global cur_id
-    print(cur_id)
     data.append({
         'id': cur_id,
         'name': request.json["name"],
@@ -56,7 +55,6 @@ def update_info(id):
         for e in data[id]['dates']:
             temp.append(e.copy())
         data[id]['is_stopped'] = get(temp, data[id]['budget'], data[id]['spent_budget'])
-    print(data[id]['dates'])
     plot(data[id]['dates'], data[id]['name'])
     home()
     return jsonify({"ok": "ok"}), 201
