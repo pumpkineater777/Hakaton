@@ -1,11 +1,5 @@
-# v-кэшбек
-# X-бюджет
-# Y-затраченно
-
 import random
 
-
-# кешбек, бюджет, сколько потреченно
 def get(v, X, Y):
     if len(v) <= 5:
         sred = 0
@@ -19,21 +13,23 @@ def get(v, X, Y):
     for i in range(len(v)):
         g.append(v[i][1])
     g.sort()
-    l11 = g[int(len(g)*0.25)]
-    r11 = g[int(len(g)*0.75)]
+    l11 = g[int(len(g)*0.3)]
+    r11 = g[int(len(g)*0.8)]
     x11 = r11-l11+0.000001
     for i in range(len(v)):
         if v[i][1] > r11+x11*1.5:
+            v[i][0] = 0
+        elif v[i][1] < l11-x11*1.5:
             v[i][0] = 0
         else:
             v[i][0] = 1
     p = 0.9
     t = []
     k = 1
-
+    x=max(0,len(v)-21)-1
     l = v[len(v)-1][1]
     r = -1
-    for i in range(len(v)-1,0, -1):
+    for i in range(len(v)-1,x, -1):
         t.append([k*v[i][0], v[i][1]])
         k *= p
         l = min(l, v[i][1])
@@ -44,7 +40,7 @@ def get(v, X, Y):
         l *= 0.93
     r += 0.0000001
     l -= 0.0000001
-    d = 6
+    d = 15
     shag = (r-l)/d
     blok = []
     for i in range(0, d):
@@ -70,9 +66,11 @@ def get(v, X, Y):
             num_bl /= 100
             cnt1 = 0
             for j in range(d):
-                if cnt1 <= num_bl:
+                cnt1 += blok[j]
+                if cnt1 >= num_bl:
                     num_bl = j
                     break
+
             l1 = l+num_bl*d
             l1 *= 100
             r1 = l+(num_bl+1)*d
@@ -88,9 +86,11 @@ def get(v, X, Y):
             num_bl /= 100
             cnt1 = 0
             for j in range(d):
-                if cnt1 <= num_bl:
+                cnt1 += blok[j]
+                if cnt1 >= num_bl:
                     num_bl = j
                     break
+
             l1 = l + num_bl * d
             l1 *= 100
             r1 = l + (num_bl + 1) * d
@@ -113,12 +113,3 @@ def get(v, X, Y):
     t.clear()
     g.clear()
     return loc_Y > loc_Y_zavtra
-
-
-v = [[1, 34.69], [2, 179.63], [3, 137.81], [4, 103.13], [5, 75.56], [6, 233.44]]
-
-
-Y = 764.26
-X = 1334.27
-
-print(get(v, X, Y))
