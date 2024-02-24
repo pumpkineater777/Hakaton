@@ -7,14 +7,15 @@ body {
 .menu {
 	position: absolute;
 	top: 50%;
-	background: #e8e8e8;
+	background: linear-gradient(to bottom, #515151, #808080);
+	#background: #808080;
 	left: 50%;
 	transform: translate(-50%,-50%);
 	margin: 0 auto;
 	width: 90%;
 	height: 100%;
 	display: grid;
-	grid-template-rows: 0.1fr 1fr; 
+	grid-template-rows: 0.1fr 1fr;
 	box-shadow: 0px 5px 24px 2px rgba(34, 60, 80, 0.2);
 }
 
@@ -25,7 +26,8 @@ header {
 
 main {
 	display: grid;
-	grid-template-columns: 0.3fr 1fr; 
+	box-shadow: 0px -7px 10px -9px #000000;
+	grid-template-columns: 0.3fr 1fr;
 	display: absolute;
 }
 
@@ -41,7 +43,9 @@ main {
 
 .options {
 	display: grid;
-	grid-template-rows: 0.1fr 1fr; 
+	z-index:500;
+	box-shadow: 5px 0px 5px -5px rgba(223, 230, 236, 0.6) inline;
+	grid-template-rows: 0.1fr 1fr;
 	position: absolute;
 	width: 100%;
 	height:100%;
@@ -50,9 +54,8 @@ main {
 
 .icon {
 	display: grid;
-	background: #808080;
+	background: #373737;
 	margin: 0;
-	box-shadow: 0px 7px 10px 2px rgba(0, 0, 0, 0.39) inset;
 	position: absolute;
 	grid-template-columns: 0.1fr 1fr;
 	width: 100%;
@@ -66,7 +69,7 @@ main {
 	position: absolute;
 	overflow-y: none;
 	overflow-x: auto;
-	  font-family: "Tajawal", sans-serif;
+	  font-family: "Ubuntu", sans-serif;
   font-weight: 300;
   display: flex;
   width:100%;
@@ -77,7 +80,7 @@ main {
   color:#e8e8e8;
   scrollbar-color: #D0CDC9 gray;
  	scrollbar-width: thin;
-} 
+}
 
 .name p {
 	padding: 0;
@@ -91,7 +94,7 @@ main {
     height: 100%;
     padding: 0px;
     margin: 0px;
-    
+
     align-items: center;
     flex-direction: column;
     display: flex;
@@ -114,7 +117,7 @@ main {
 	display: grid;
 	grid-template-columns: 1fr 0.1fr;
 	border-top: 1px solid #3A3A3A;
-	background: #c0c0c0;
+	background: #414141;
 	position: relative;
 	box-sizing: content-box;
 }
