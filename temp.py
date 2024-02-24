@@ -6,7 +6,14 @@ import random
 
 
 # кешбек, бюджет, сколько потреченно
-def get(v, Y, X):
+def get(v, X, Y):
+    if len(v) <= 5:
+        sred = 0
+        for i in range(len(v)):
+            sred += v[i][1]
+        sred /= len(v)
+        if sred*5*1.5+Y < X:
+            return sred*5*1.5+Y>X
     p = 0.9
     t = []
     x = max(0, len(v)-20)-1
@@ -18,6 +25,12 @@ def get(v, Y, X):
         k *= p
         l = min(l, v[i][1])
         r = max(r, v[i][1])
+    if t[0][1] >= (r-l)*0.7+l:
+        r *= 1.05
+    if t[0][1] <= (r-l)*0.3+l:
+        l *= 0.93
+    r += 0.0000001
+    l -= 0.0000001
     d = 5
     shag = (r-l)/d
     blok = []
@@ -31,7 +44,7 @@ def get(v, Y, X):
         cnt += t[i][0]
         blok[bl] += t[i][0]
     cnt *= 100
-    cnt=int(cnt)
+    cnt = int(cnt)
     n = 10000
     loc_Y = 0
     loc_Y_zavtra = 0
@@ -83,12 +96,5 @@ def get(v, Y, X):
         loc_Y_zavtra += ans2
     loc_Y /= n
     loc_Y_zavtra /= n
-    return loc_Y < loc_Y1_zavtra
+    return loc_Y > loc_Y_zavtra
 
-
-v = [[1, 34], [2, 179.63], [3, 137.81], [4, 103.13]]
-
-
-Y = 454.57
-X = 1250.14
-print(get(v, X, Y))

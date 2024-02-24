@@ -7,13 +7,16 @@ app = Flask(__name__)
 cur_id = 0
 data = []
 
+
 @app.route("/temp", methods=['GET'])
 def temp():
     return jsonify(data), 201
 
+
 @app.route('/api/partners', methods=['POST'])
 def create_partner():
     global cur_id
+    print(cur_id)
     data.append({
         'id': cur_id,
         'name': request.json["name"],
@@ -29,6 +32,7 @@ def create_partner():
     temp['budget'] = data[-1]['budget']
     temp['spent_budget'] = data[-1]['spent_budget']
     return jsonify(temp), 201
+
 
 @app.route('/api/partners/<int:id>', methods=['GET'])
 def get_info(id):
@@ -49,9 +53,11 @@ def update_info(id):
         data[id]['is_stopped'] = get(data[id]['dates'], data[id]['budget'], data[id]['spent_budget'])
     return jsonify({"ok": "ok"}), 201
 
+
 @app.route('/home')
 def home():
     return render_template('Main.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
