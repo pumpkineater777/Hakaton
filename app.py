@@ -47,9 +47,10 @@ def get_info(id):
     return jsonify(temp), 201
 
 
-@app.route('/api/partners/<int:id>', methods=['PUT'])
+@app.route('/api/partners/<int:id>', methods=['GET'])
 def update(id):
     plot(data[id]['dates'], data[id]['name'])
+    return jsonify({"ok": "ok"}), 201
 
 
 @app.route('/api/partners/<int:id>/cashback', methods=['PUT'])
