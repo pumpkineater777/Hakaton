@@ -44,13 +44,8 @@ def get_info(id):
     temp['budget'] = data[id]['budget']
     temp['spent_budget'] = data[id]['spent_budget']
     temp['is_stopped'] = data[id]['is_stopped']
-    return jsonify(temp), 201
-
-
-@app.route('/api/partners/<int:id>', methods=['GET'])
-def update(id):
     plot(data[id]['dates'], data[id]['name'])
-    return jsonify({"ok": "ok"}), 201
+    return jsonify(temp), 201
 
 
 @app.route('/api/partners/<int:id>/cashback', methods=['PUT'])
@@ -65,7 +60,7 @@ def update_info(id):
         data[id]['is_stopped'] = get(temp, data[id]['budget'], data[id]['spent_budget'])
     plot(data[id]['dates'], data[id]['name'])
     home()
-    return jsonify({"ok": "ok"}), 201
+    return jsonify({"is_stopped": data[id]['is_stopped']}), 201
 
 
 @app.route('/home')
