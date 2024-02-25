@@ -19,10 +19,10 @@ function addOption(obj) {
     p.innerHTML = obj.name;
 
     containerTwo.innerHTML = `                    <svg width="30" idcompany = "${obj.id}" height="30" class = "button A${obj.name}">
-                      <circle cx="18" cy="15" r="0.5" stroke="#e8e8e8" stroke-width="2" fill="#e8e8e8" />
-                      <circle cx="15" cy="15" r="12" stroke="#e8e8e8" stroke-width="2" fill="none" />
-                      <line x1="18" y1="15" x2="13" y2="9" style="stroke:#e8e8e8;stroke-width:3" />
-                      <line x1="18" y1="15" x2="13" y2="21" style="stroke: #e8e8e8;stroke-width:3" />
+                      <circle idcompany = "${obj.id}" cx="18" cy="15" r="0.5" stroke="#e8e8e8" stroke-width="2" fill="#e8e8e8" />
+                      <circle idcompany = "${obj.id}" cx="15" cy="15" r="12" stroke="#e8e8e8" stroke-width="2" fill="none" />
+                      <line idcompany = "${obj.id}" x1="18" y1="15" x2="13" y2="9" style="stroke:#e8e8e8;stroke-width:3" />
+                      <line idcompany = "${obj.id}" x1="18" y1="15" x2="13" y2="21" style="stroke: #e8e8e8;stroke-width:3" />
                     </svg>`
 
     let parent = document.querySelector(".sections");
@@ -33,7 +33,7 @@ function addOption(obj) {
         document.querySelector(".AnsP").innerHTML = "";
         document.querySelector(".graph").style["background"] = 'none';
         console.log(idCompany)
-        fetch(`http://localhost:8080/api/partners/${idCompany}`, {method: "GET"})
+        fetch(`http://localhost:8080/api/partners/${idCompany}/temp`, {method: "GET"})
          .then((response) => {
             if (!response.ok) {
                  throw new Error(`HTTP error! Status: ${response.status}`);
@@ -45,7 +45,17 @@ function addOption(obj) {
 
             document.querySelector("nav").classList.toggle("hidden");
             document.querySelector(".addPoint").setAttribute("idcompany", idCompany);
-            document.querySelector(".graph").style["background-image"] = 'url("/static/graph.jpg")';
+            console.log(response['url'])
+            fetch(response['url'], {method:"GET"})
+                      .then((response) => {
+            if (!response.ok) {
+                 throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            return response.json();
+         }).then((response) => {
+             document.querySelector(".graph").style["background-image"] = `url("${response}")`;
+            })
 
             let isStopped = response["is_stopped"]
 
@@ -95,7 +105,17 @@ document.querySelector(".addPoint").addEventListener("click", (e) => {
                 } else {
                     document.querySelector(".AnsP").innerHTML = "DON'T STOP"
                 }
-                document.querySelector(".graph").style["background-image"] = "url('/static/graph.jpg')"
+                fetch(response['url'], {method:"GET"})
+                      .then((response) => {
+            if (!response.ok) {
+                 throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            return response.json();
+         }).then((response) => {
+             document.querySelector(".graph").style["background-image"] = `url("${response}")`;
+            })
+
           });
 })
 
