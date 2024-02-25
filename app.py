@@ -57,7 +57,6 @@ def updater(id):
         encoded_string = base64.b64encode(image_file.read())
         response = requests.post(apiurl, {"image": encoded_string})
         temp['url'] = response.json()['data']['url']
-
     return jsonify(temp), 201
 
 @app.route('/api/partners/<int:id>', methods=['GET'])
@@ -75,15 +74,16 @@ def get_info(id):
 def update_info(id):
     global data
     data[id]['spent_budget'] += int(request.json["cashback"])
-    data[id]['dates'].append([request.json["date"].split(' ')[0], int(request.json["cashback"])])  # split()
+    data[id]['dates'].append([request.json["date"].split(';')[0], int(request.json["cashback"])])  # split()
     if not data[id]['is_stopped']:
         data[id]['is_stopped'] = get(data[id]['dates'], data[id]['budget'], data[id]['spent_budget'])
     plot(data[id]['dates'], data[id]['name'], data[id]['budget'])
+    temp = {"is_stopped": data[id]['is_stopped']}
     with open("static/graph.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         response = requests.post(apiurl, {"image": encoded_string})
         temp['url'] = response.json()['data']['url']
-    return jsonify({"is_stopped": data[id]['is_stopped']}), 201
+    return jsonify(temp), 201
 
 
 @app.route('/home')
