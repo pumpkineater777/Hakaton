@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('TkAgg')
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -19,7 +22,7 @@ def plot(pairs, name, budget):
     plt.title(name)
     plt.gca().set_facecolor("#F8F3EA")
     plt.axhline(y=budget, linestyle='--')
-    plt.savefig("graph.jpg", facecolor="#F8F3EA")
+    plt.savefig("static/graph.jpg", facecolor="#F8F3EA")
 
 
 
