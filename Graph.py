@@ -23,9 +23,3 @@ def plot(pairs, name, budget):
     plt.gca().set_facecolor("#F8F3EA")
     plt.axhline(y=budget, linestyle='--')
     plt.savefig("static/graph.jpg", facecolor="#F8F3EA")
-
-
-
-
-
-

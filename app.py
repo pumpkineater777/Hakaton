@@ -4,12 +4,15 @@ from flask_cors import CORS
 from strategy import get
 from Graph import plot
 from PIL import Image
+import base64
+import requests
 
 app = Flask(__name__)
 CORS(app)
 
 cur_id = 0
 data = []
+apiurl = "https://api.imgbb.com/1/upload?expiration=6000&key=79dc95f5c9880d6e45c37c6acf2d5306"
 
 
 @app.route("/temp", methods=['GET'])
@@ -19,7 +22,7 @@ def temp():
 
 @app.route('/api/partners', methods=['POST'])
 def create_partner():
-    global cur_id
+    global cur_id, apiurl
     data.append({
         'id': cur_id,
         'name': request.json["name"],
@@ -46,10 +49,15 @@ def get_info(id):
     temp['spent_budget'] = data[id]['spent_budget']
     temp['is_stopped'] = data[id]['is_stopped']
     if (len(data[id]['dates']) == 0):
-        image = Image.open("start.jpg")
-        image.save("graph.jpg")
+        image = Image.open("static/start.jpg")
+        image.save("static/graph.jpg")
     else:
         plot(data[id]['dates'], data[id]['name'], data[id]['budget'])
+    with open("static/start.jpg", "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+        response = requests.post(apiurl, {"image": encoded_string})
+        response.json()
+        print(response.status_code)
     return jsonify(temp), 201
 
 
