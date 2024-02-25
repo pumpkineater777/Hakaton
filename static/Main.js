@@ -28,7 +28,7 @@ function addOption(obj) {
     let parent = document.querySelector(".sections");
     parent.appendChild(option);
     document.querySelector(`svg.button.A${obj.name}`).addEventListener("click", (e) => {
-        let idCompany = +e.target.getAttribute("idcompany");
+        let idCompany = e.target.getAttribute("idcompany");
         console.log(`vg.button.A${obj.name}: ${idCompany}`);
         document.querySelector(".AnsP").innerHTML = "";
         document.querySelector(".graph").style["background"] = 'none';
@@ -153,8 +153,8 @@ let lastIndex = 0;
     for (x of data) {
        addOption(x);
     }
-
-    lastIndex = data[data.length - 1]["id"];
+    if (lastIndex != 0)
+        lastIndex = data[data.length - 1]["id"];
 
   });
 
