@@ -16,7 +16,7 @@ apiurl = "https://api.imgbb.com/1/upload?expiration=6000&key=79dc95f5c9880d6e45c
 
 
 @app.route("/temp", methods=['GET'])
-def temp():
+def temp1():
     return jsonify(data), 201
 
 
