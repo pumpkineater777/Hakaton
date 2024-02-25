@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Предсказатель</title>
 	<link rel="stylesheet" href="../static/Styles.css">
+	<link href="../venv/graph.jpg">
 	<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
 	<script defer type="text/javascript" src ="../static/Main.js"></script>
 </head>
@@ -15,7 +16,7 @@
 		<main>
 			<div class ="container">
 				<div class="options">
-					<div class = "container">
+					<div class = "container" style="min-height:57px;">
 						<div class = "icon">
 							<div class = "container">
 								<svg width="30" height="30" class = "image" id = "image">
@@ -56,15 +57,44 @@
 				</div>
 
 			<div class = "container">
-				<nav>
-					<div class = "container">
-						<svg class = "graph hidden"></svg>
+				<div class ="containerB">
+				<nav class ="hidden">
+					<div class = "container graphContainer">
+						<image src ="graph.jpg" class = "graph"></image>
 					</div>
 					<div class = "container">
 						<div class = "answer">
+							<div class = "container">
+								<button class = "addPoint" >Add point</button>
+							</div>
+							<div class = "container">
+								<div class = "containerAns">
+									<div class = "container containerFormPoint">
+										<form class = "formPoint">
+											<div class = "container containerFormPoint">
+												<label for = "Cashback">Cashback: </label>
+											</div>
+											<div class = "container containerFormPointInput">
+												<input id ="Cashback" type = "text">
+											</div>
+											<div class ="container containerFormPoint">
+												<label for = "Day">Day: </label>
+											</div>
+											<div class = "container containerFormPointInput">
+												<input id = "Day" type = "text"/>
+											</div>
+										</form>
+									</div>
+									<div class = "container ans">
+										<p>ЗАКРЫВАЙ</p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</nav>
+
+				</div>
 			</div>
 
 			</main>
