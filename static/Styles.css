@@ -16,7 +16,6 @@ body {
 	height: 100%;
 	display: grid;
 	grid-template-rows: 0.1fr 1fr;
-	box-shadow: 0px 5px 24px 2px rgba(34, 60, 80, 0.2);
 }
 
 header {
@@ -126,13 +125,135 @@ main {
 	cursor: pointer;
 }
 
+
 nav {
 	position: absolute;
 	width: 100%;
-	box-shadow: 0px 7px 10px 2px rgba(34, 60, 80, 0.2) inset;
-	background: #414141;
+	display: grid;
+	grid-template-rows: 1fr 0.2fr;
 	height: 100%;
-  	transition: box-shadow 1s;
+}
+
+label[for = "Cashback"] {
+    margin-right: 5px;
+       font-family: "Ubuntu", sans-serif;
+   font-weight: bold;
+   font-size: 1.5em;
+   color: #e8e8e8;
+}
+
+.containerFormPoint {
+justify-content: right !important;
+}
+
+label[for = "Day"] {
+    margin-right: 5px;
+       font-family: "Ubuntu", sans-serif;
+   font-weight: bold;
+   font-size: 1.5em;
+   color: #e8e8e8;
+}
+
+.addPoint {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   border: none;
+   background: #e8e8e8;
+   border-sizing:border-box;
+   border-radius: 5px;
+   margin: 0;
+   width: 90%;
+   height:50%;
+   cursor: pointer;
+   transform: translate(-50%, -50%);
+   font-family: "Ubuntu", sans-serif;
+   font-weight: bold;
+   font-size: 1.5em;
+}
+
+.addPoint:active {
+box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+}
+
+.containerAns {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 0.4fr;
+}
+
+.ans {
+    justify-content: right !important;
+}
+
+.containerB {
+    position: absolute;
+    width: 100%;
+    height:100%;
+    margin: 0;
+    	background: #414141;
+}
+
+.containerFormPointInput {
+    justify-content: left !important;
+}
+
+.formPoint {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.inputPointText {
+   font-family: "Ubuntu", sans-serif;
+   font-weight: bold;
+   font-size: 1.5em;
+   color: #e8e8e8;
+}
+.containerInputPoint {
+    margin-left: 5px;
+}
+
+.ans p {
+    position: absolute;
+    margin: 0;
+       font-family: "Ubuntu", sans-serif;
+     font-weight: bold;
+    font-size: 1.5em;
+    color: #e8e8e8;
+    right: 30px;
+}
+
+.answer {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    width: 90%;
+    height: 90%;
+    top: 0;
+    left: 50%;
+    margin: 0;
+	transform: translate(-50%, 0);
+}
+.graph {
+    position: absolute;
+    top: 50%;
+    height: 500px;
+    width: 800px;
+    background: white;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.graphContainer {
+    overflow: auto;
+    scrollbar-color: #D0CDC9 gray;
+  	scrollbar-width: thin;
+  	background: #3A3A3A;
 }
 
 nav.working {
