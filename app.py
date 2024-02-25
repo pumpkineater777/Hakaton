@@ -1,8 +1,9 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request, render_template
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from strategy import get
 from Graph import plot
+from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
@@ -44,7 +45,11 @@ def get_info(id):
     temp['budget'] = data[id]['budget']
     temp['spent_budget'] = data[id]['spent_budget']
     temp['is_stopped'] = data[id]['is_stopped']
-    plot(data[id]['dates'], data[id]['name'])
+    if (len(data[id]['dates']) == 0):
+        image = Image.open("start.jpg")
+        image.save("graph.jpg")
+    else:
+        plot(data[id]['dates'], data[id]['name'], data[id]['budget'])
     return jsonify(temp), 201
 
 
@@ -54,11 +59,8 @@ def update_info(id):
     data[id]['spent_budget'] += int(request.json["cashback"])
     data[id]['dates'].append([request.json["date"].split(' ')[0], int(request.json["cashback"])])  # split()
     if not data[id]['is_stopped']:
-        temp = []
-        for e in data[id]['dates']:
-            temp.append(e.copy())
-        data[id]['is_stopped'] = get(temp, data[id]['budget'], data[id]['spent_budget'])
-    plot(data[id]['dates'], data[id]['name'])
+        data[id]['is_stopped'] = get(data[id]['dates'], data[id]['budget'], data[id]['spent_budget'])
+    plot(data[id]['dates'], data[id]['name'], data[id]['budget'])
     return jsonify({"is_stopped": data[id]['is_stopped']}), 201
 
 

@@ -7,22 +7,24 @@ def get(v, X, Y):
             sred += v[i][1]
         sred /= len(v)
         if sred*5*2+Y < X:
-            v.clear()
+
             return sred*5*2+Y >= X
     g = []
+    t1 = []
     for i in range(len(v)):
         g.append(v[i][1])
+        t1.append(0)
     g.sort()
     l11 = g[int(len(g)*0.25)]
     r11 = g[int(len(g)*0.75)]
     x11 = r11-l11+0.000001
     for i in range(len(v)):
         if v[i][1] > r11+x11*1.5:
-            v[i][0] = 0
+            t1[i] = 0
         elif v[i][1] < l11-x11*1.5:
-            v[i][0] = 0
+            t1[i] = 0
         else:
-            v[i][0] = 1
+            t1[i] = 1
     p = 0.9
     t = []
     k = 1
@@ -30,7 +32,7 @@ def get(v, X, Y):
     l = v[len(v)-1][1]
     r = -1
     for i in range(len(v)-1,x, -1):
-        t.append([k*v[i][0], v[i][1]])
+        t.append([k*t1[i], v[i][1]])
         k *= p
         l = min(l, v[i][1])
         r = max(r, v[i][1])
@@ -109,7 +111,8 @@ def get(v, X, Y):
         loc_Y_zavtra += ans2
     loc_Y /= n
     loc_Y_zavtra /= n
-    v.clear()
+    t.clear()
     t.clear()
     g.clear()
+    print(loc_Y,loc_Y_zavtra)
     return loc_Y > loc_Y_zavtra
