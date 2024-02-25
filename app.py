@@ -59,7 +59,6 @@ def update_info(id):
             temp.append(e.copy())
         data[id]['is_stopped'] = get(temp, data[id]['budget'], data[id]['spent_budget'])
     plot(data[id]['dates'], data[id]['name'])
-    home()
     return jsonify({"is_stopped": data[id]['is_stopped']}), 201
 
 
