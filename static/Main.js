@@ -18,22 +18,43 @@ function addOption(obj) {
 
     p.innerHTML = obj.name;
 
-    containerTwo.innerHTML = `										<svg width="30" idCompany = "${obj.id}" height="30" class = "button A${obj.name}">
-											<circle cx="18" cy="15" r="0.5" stroke="#e8e8e8" stroke-width="2" fill="#e8e8e8" />
-											<circle cx="15" cy="15" r="12" stroke="#e8e8e8" stroke-width="2" fill="none" />
-											<line x1="18" y1="15" x2="13" y2="9" style="stroke:#e8e8e8;stroke-width:3" />
-											<line x1="18" y1="15" x2="13" y2="21" style="stroke: #e8e8e8;stroke-width:3" />
-										</svg>`
+    containerTwo.innerHTML = `                    <svg width="30" idcompany = "${obj.id}" height="30" class = "button A${obj.name}">
+                      <circle cx="18" cy="15" r="0.5" stroke="#e8e8e8" stroke-width="2" fill="#e8e8e8" />
+                      <circle cx="15" cy="15" r="12" stroke="#e8e8e8" stroke-width="2" fill="none" />
+                      <line x1="18" y1="15" x2="13" y2="9" style="stroke:#e8e8e8;stroke-width:3" />
+                      <line x1="18" y1="15" x2="13" y2="21" style="stroke: #e8e8e8;stroke-width:3" />
+                    </svg>`
 
     let parent = document.querySelector(".sections");
     parent.appendChild(option);
     document.querySelector(`svg.button.A${obj.name}`).addEventListener("click", (e) => {
-        let idCompany = +e.target.getAttribute("idCompany");
+        let idCompany = +e.target.getAttribute("idcompany");
+        console.log(`vg.button.A${obj.name}: ${idCompany}`);
+        document.querySelector(".AnsP").innerHTML = "";
+        document.querySelector(".graph").style["background"] = 'none';
+        console.log(idCompany)
+        fetch(`http://localhost:8080/api/partners/${idCompany}`, {method: "GET"})
+         .then((response) => {
+            if (!response.ok) {
+                 throw new Error(`HTTP error! Status: ${response.status}`);
+            }
 
-        document.querySelector("nav").classList.toggle("hidden");
-        document.querySelector(".addPoint").setAttribute("idCompany", idCompany);
+            return response.json();
+         })
+         .then((response) => {
 
-        document.querySelector(".graph").style["background-image"] = 'url("/static/graph.jpg")';
+            document.querySelector("nav").classList.toggle("hidden");
+            document.querySelector(".addPoint").setAttribute("idcompany", idCompany);
+            document.querySelector(".graph").style["background-image"] = 'url("/static/graph.jpg")';
+
+            let isStopped = response["is_stopped"]
+
+            if (isStopped == true) {
+                document.querySelector(".AnsP").innerHTML = "DON'T STOP"
+            } else {
+                document.querySelector(".AnsP").innerHTML = "STOP"
+            }
+         })
 
         //let graph = new Image(); graph.src = "../graph.jpg"
         // let canvas = document.querySelector(".graph");
@@ -42,16 +63,14 @@ function addOption(obj) {
     });
 }
 
-function draw(data) {
-}
 
 document.querySelector(".addPoint").addEventListener("click", (e) => {
 
-   let idCompany = e.target.getAttribute("idCompany")
+   let idCompany = +e.target.getAttribute("idcompany")
    let cashback = document.querySelector("#Cashback").value
    let day = document.querySelector("#Day").value
 
-    console.log(day)
+    console.log(idCompany);
 
    if(cashback == "" || day == "")
     return;
@@ -67,14 +86,16 @@ document.querySelector(".addPoint").addEventListener("click", (e) => {
                  throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            return response;
+            return response.json();
              })
           .then((response) => {
-            querySelector(".graph").style["background-image"] = "url('/static/graph.jpg')"
-
-           // let canvas = document.querySelector(".graph");
-            //let context = canvas.getContext("2d");
-            //context.drawImage(graph, 0, 0)
+                let isStopped = response["is_stopped"];
+                if (isStopped == true) {
+                    document.querySelector(".AnsP").innerHTML = "STOP"
+                } else {
+                    document.querySelector(".AnsP").innerHTML = "DON'T STOP"
+                }
+                document.querySelector(".graph").style["background-image"] = "url('/static/graph.jpg')"
           });
 })
 
@@ -98,8 +119,11 @@ forma.addEventListener("submit", (e) => {
     let budget = +document.querySelector("#inputBudget").value;
 
     document.querySelector(".addCompany").classList.add("hidden");
-    fetch("http://localhost:8080/api/partners", {method: 'POST',headers: {'Content-Type': 'application/json;charset=utf-8'}, body: JSON.stringify({"name": name, "budget": budget})}).then((r) => {
-        addOption({"name": name, "budget": budget})
+    fetch("http://localhost:8080/api/partners", {method: 'POST', headers: {'Content-Type': 'application/json;charset=utf-8'}, body: JSON.stringify({"name": name, "budget": budget})})
+    .then((r) => {
+
+        addOption({"name": name, "budget": budget, id: lastIndex})
+        lastIndex+=1
     })
     document.querySelector("#inputCompany").value = "";
     document.querySelector("#inputBudget").value = "";
@@ -111,7 +135,10 @@ document.querySelector("body").addEventListener("click", (e) => {
     document.querySelector(".addCompany").classList.add("hidden");
 })
 
-  fetch("http://localhost:8080/temp", {method: 'GET', mod: "cors"})
+let lastIndex;
+
+////////////////////
+  fetch("http://localhost:8080/temp", {method: 'GET'})
   .then((response) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -121,10 +148,14 @@ document.querySelector("body").addEventListener("click", (e) => {
   })
   .then((response) => {
     let data = response;
+    console.log(data)
     let sections = document.querySelector(".sections");
     for (x of data) {
        addOption(x);
     }
+
+    lastIndex = data[data.length - 1]["id"];
+
   });
 
 //////////////////////////////////
