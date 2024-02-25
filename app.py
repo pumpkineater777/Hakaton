@@ -56,8 +56,8 @@ def updater(id):
     with open("static/graph.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         response = requests.post(apiurl, {"image": encoded_string})
-        response.json()
-        temp['url'] = response['url']
+        temp['url'] = response.json()['data']['url']
+
     return jsonify(temp), 201
 
 @app.route('/api/partners/<int:id>', methods=['GET'])
@@ -82,8 +82,7 @@ def update_info(id):
     with open("static/graph.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         response = requests.post(apiurl, {"image": encoded_string})
-        response.json()
-        temp['url'] = response['url']
+        temp['url'] = response.json()['data']['url']
     return jsonify({"is_stopped": data[id]['is_stopped']}), 201
 
 
