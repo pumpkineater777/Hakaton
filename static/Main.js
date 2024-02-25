@@ -33,24 +33,13 @@ function addOption(obj) {
         document.querySelector("nav").classList.toggle("hidden");
         document.querySelector(".addPoint").setAttribute("idCompany", idCompany);
 
-        fetch(`http://localhost:8080/api/partners/${idCompany}`, {method: 'GET', mod: "cors"})
-          .then((response) => {
-            if (!response.ok) {
-                 throw new Error(`HTTP error! Status: ${response.status}`);
-            }
 
-            return response.blob();
-             })
-          .then((response) => {
-            let graph = new Image();
-            graph.src = "../venv/graph.jpg"
+        document.querySelector(".graph").style["background-image"] = `url('../graph.jpg')`;
 
-            document.querySelector(".graph").style["background-image"] = `url('../venv/graph.jpg')`;
-
-           // let canvas = document.querySelector(".graph");
-            //let context = canvas.getContext("2d");
-            //context.drawImage(graph, 0, 0)
-          });
+        //let graph = new Image(); graph.src = "../graph.jpg"
+        // let canvas = document.querySelector(".graph");
+        //let context = canvas.getContext("2d");
+        //context.drawImage(graph, 0, 0)
     });
 }
 
@@ -83,11 +72,11 @@ document.querySelector(".addPoint").addEventListener("click", (e) => {
              })
           .then((response) => {
             let graph = new Image();
-            graph.src = "../venv/graph.jpg"
+            graph.src = "../graph.jpg"
 
             console.log("OK")
 
-            document.querySelector(".graph").style["background-image"] = `url('../venv/graph.jpg')`;
+            document.querySelector(".graph").style["background-image"] = `url('../graph.jpg')`;
 
            // let canvas = document.querySelector(".graph");
             //let context = canvas.getContext("2d");
