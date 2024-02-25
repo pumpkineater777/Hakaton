@@ -40,8 +40,8 @@ def create_partner():
     return jsonify(temp), 201
 
 
-@app.route('/api/partners/<int:id>', methods=['GET'])
-def get_info(id):
+@app.route('/api/partners/<int:id>/temp', methods=['GET'])
+def updater(id):
     temp = dict()
     temp['id'] = data[id]['id']
     temp['name'] = data[id]['name']
@@ -53,11 +53,21 @@ def get_info(id):
         image.save("static/graph.jpg")
     else:
         plot(data[id]['dates'], data[id]['name'], data[id]['budget'])
-    with open("static/start.jpg", "rb") as image_file:
+    with open("static/graph.jpg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         response = requests.post(apiurl, {"image": encoded_string})
         response.json()
-        print(response.status_code)
+        temp['url'] = response['url']
+    return jsonify(temp), 201
+
+@app.route('/api/partners/<int:id>', methods=['GET'])
+def get_info(id):
+    temp = dict()
+    temp['id'] = data[id]['id']
+    temp['name'] = data[id]['name']
+    temp['budget'] = data[id]['budget']
+    temp['spent_budget'] = data[id]['spent_budget']
+    temp['is_stopped'] = data[id]['is_stopped']
     return jsonify(temp), 201
 
 
@@ -69,6 +79,11 @@ def update_info(id):
     if not data[id]['is_stopped']:
         data[id]['is_stopped'] = get(data[id]['dates'], data[id]['budget'], data[id]['spent_budget'])
     plot(data[id]['dates'], data[id]['name'], data[id]['budget'])
+    with open("static/graph.jpg", "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+        response = requests.post(apiurl, {"image": encoded_string})
+        response.json()
+        temp['url'] = response['url']
     return jsonify({"is_stopped": data[id]['is_stopped']}), 201
 
 
