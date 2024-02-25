@@ -15,4 +15,4 @@ def plot(pairs, name):
     plt.xticks(dates, date)
     plt.plot(dates, cash, marker='o', markersize=6)
     plt.title(name)
-    plt.savefig("graph.jpg")
+    plt.savefig("static/graph.jpg")

@@ -34,7 +34,7 @@ function addOption(obj) {
         document.querySelector(".addPoint").setAttribute("idCompany", idCompany);
 
 
-        document.querySelector(".graph").style["background-image"] = `url('../graph.jpg')`;
+        document.querySelector(".graph").style["background-image"] = 'url("/static/graph.jpg")';
 
         //let graph = new Image(); graph.src = "../graph.jpg"
         // let canvas = document.querySelector(".graph");
@@ -71,12 +71,7 @@ document.querySelector(".addPoint").addEventListener("click", (e) => {
             return response;
              })
           .then((response) => {
-            let graph = new Image();
-            graph.src = "../graph.jpg"
-
-            console.log("OK")
-
-            document.querySelector(".graph").style["background-image"] = `url('../graph.jpg')`;
+            document.querySelector(".graph").style["background-image"] = "url('/static/graph.jpg')";
 
            // let canvas = document.querySelector(".graph");
             //let context = canvas.getContext("2d");
