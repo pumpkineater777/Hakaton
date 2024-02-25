@@ -123,7 +123,7 @@ forma.addEventListener("submit", (e) => {
     .then((r) => {
 
         addOption({"name": name, "budget": budget, id: lastIndex})
-        lastIndex+=1
+        lastIndex += 1
     })
     document.querySelector("#inputCompany").value = "";
     document.querySelector("#inputBudget").value = "";
@@ -135,7 +135,7 @@ document.querySelector("body").addEventListener("click", (e) => {
     document.querySelector(".addCompany").classList.add("hidden");
 })
 
-let lastIndex;
+let lastIndex = 0;
 
 ////////////////////
   fetch("http://localhost:8080/temp", {method: 'GET'})
