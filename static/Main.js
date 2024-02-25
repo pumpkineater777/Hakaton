@@ -43,23 +43,16 @@ function addOption(obj) {
          })
          .then((response) => {
 
+             document.querySelector(".graph").style["background-image"] = `url("${response['url']}")`;
             document.querySelector("nav").classList.toggle("hidden");
             document.querySelector(".addPoint").setAttribute("idcompany", idCompany);
-            console.log(response['url'])
-            fetch(response['url'], {method:"GET"})
-                      .then((response) => {
-            if (!response.ok) {
-                 throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            return response.json();
-         }).then((response) => {
-             document.querySelector(".graph").style["background-image"] = `url("${response}")`;
-            })
-
             let isStopped = response["is_stopped"]
+                console.log(isStopped)
 
-            if (isStopped == true) {
+             if(response["spent_budget"] == 0)
+                 return;
+
+            if (isStopped == false) {
                 document.querySelector(".AnsP").innerHTML = "DON'T STOP"
             } else {
                 document.querySelector(".AnsP").innerHTML = "STOP"
@@ -99,12 +92,16 @@ document.querySelector(".addPoint").addEventListener("click", (e) => {
             return response.json();
              })
           .then((response) => {
+             if(response["spent_budget"] == 0)
+                 return;
                 let isStopped = response["is_stopped"];
+                console.log(isStopped)
                 if (isStopped == true) {
                     document.querySelector(".AnsP").innerHTML = "STOP"
                 } else {
                     document.querySelector(".AnsP").innerHTML = "DON'T STOP"
                 }
+
                 fetch(response['url'], {method:"GET"})
                       .then((response) => {
             if (!response.ok) {
@@ -113,7 +110,7 @@ document.querySelector(".addPoint").addEventListener("click", (e) => {
 
             return response.json();
          }).then((response) => {
-             document.querySelector(".graph").style["background-image"] = `url("${response}")`;
+            document.querySelector(".addPoint").setAttribute("idcompany", idCompany);
             })
 
           });
