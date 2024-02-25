@@ -74,7 +74,7 @@ def get_info(id):
 def update_info(id):
     global data
     data[id]['spent_budget'] += int(request.json["cashback"])
-    data[id]['dates'].append([request.json["date"].split(';')[0], int(request.json["cashback"])])  # split()
+    data[id]['dates'].append([request.json["date"].split(' ')[0], int(request.json["cashback"])])  # split()
     if not data[id]['is_stopped']:
         data[id]['is_stopped'] = get(data[id]['dates'], data[id]['budget'], data[id]['spent_budget'])
     plot(data[id]['dates'], data[id]['name'], data[id]['budget'])
