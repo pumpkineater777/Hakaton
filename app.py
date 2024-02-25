@@ -52,7 +52,7 @@ def get_info(id):
 def update_info(id):
     global data
     data[id]['spent_budget'] += request.json["cashback"]
-    data[id]['dates'].append([request.json["date"].split(';')[0], request.json["cashback"]])  # split()
+    data[id]['dates'].append([request.json["date"].split(' ')[0], request.json["cashback"]])  # split()
     if not data[id]['is_stopped']:
         temp = []
         for e in data[id]['dates']:
